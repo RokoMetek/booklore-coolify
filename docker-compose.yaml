@@ -19,6 +19,12 @@ services:
       - ./data:/app/data
       - ./books:/books
       - ./bookdrop:/bookdrop
+    healthcheck:
+      test: CMD-SHELL curl -f http://localhost:${BOOKLORE_PORT}/ || exit 1
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
     restart: unless-stopped
 
   mariadb:
