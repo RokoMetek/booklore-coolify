@@ -14,17 +14,17 @@ services:
       mariadb:
         condition: service_healthy
     ports:
-      - "${BOOKLORE_PORT}:${BOOKLORE_PORT}"
+      - "${BOOKLORE_PORT}"
     volumes:
       - ./data:/app/data
       - ./books:/books
       - ./bookdrop:/bookdrop
     healthcheck:
-      test: ["CMD", "pgrep", "-f", "booklore"]
-      interval: 15s
+      test: ["CMD-SHELL", "nc -z 127.0.0.1 6060 || exit 1"]
+      interval: 10s
       timeout: 5s
-      retries: 5
-      start_period: 40s
+      retries: 3
+      start_period: 90s
     restart: unless-stopped
 
   mariadb:
