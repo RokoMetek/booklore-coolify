@@ -15,8 +15,6 @@ services:
         condition: service_healthy
     ports:
       - "${BOOKLORE_PORT}:${BOOKLORE_PORT}"
-    exports:
-      - "${BOOKLORE_PORT}"
     volumes:
       - ./data:/app/data
       - ./books:/books
