@@ -20,7 +20,7 @@ services:
       - ./books:/books
       - ./bookdrop:/bookdrop
     healthcheck:
-      test: CMD-SHELL curl -f http://localhost:${BOOKLORE_PORT}/ || exit 1
+      test: ["CMD", "pgrep", "-f", "booklore"]
       interval: 15s
       timeout: 5s
       retries: 5
